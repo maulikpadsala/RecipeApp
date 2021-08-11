@@ -1,0 +1,86 @@
+﻿@model RecipeApp.Models.RecipeModel
+
+@{
+    ViewData["Title"] = "Update Recipe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Recipe</h1>
+
+<h4>Update New Recipe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="UpdateRecipe" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="RecipeId" type="hidden" />
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="RecipeName" class="control-label"></label>
+                    <input asp-for="RecipeName" class="form-control" />
+                    <span asp-validation-for="RecipeName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ingredients" class="control-label"></label>
+                    <input asp-for="Ingredients" class="form-control" />
+                    <span asp-validation-for="Ingredients" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @if (!string.IsNullOrEmpty(Model.Image))
+                    {
+                        <img src="@Model.Image" alt="No Image" height="300" width="500" />
+                    }
+                    else
+                    {
+                        <img src="~/images/NoImage.png" height="300" width="500" />
+                    }
+
+                    <input type="hidden" value="@Model.Image" name="oldImage"  />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Image" class="control-label"></label>
+                    <input asp-for="Image" class="form-control-file" type="file" id="recipefile" accept="image/png, image/gif, image/jpeg" onchange="FileUploadChnage();"/>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update Recipe" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    function FileUploadChnage() {
+        
+        var recipeFile = document.getElementById('recipefile');
+
+        if (recipeFile.files.length > 0) {
+            var size = recipeFile.files.item(0).size/(1024 * 1024);
+            if (size > 2) {
+                alert("please select a file less than 2MB");
+                document.getElementById('recipefile').value = null;
+            }
+        }
+    }
+</script>
