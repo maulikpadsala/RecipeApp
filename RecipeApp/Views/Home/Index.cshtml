@@ -1,0 +1,59 @@
+﻿@model List<RecipeModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="button" class="btn btn-primary" value="Create New Recipe" onclick="CreateRecipe();" />
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Recipe</th>
+                <th scope="col">Ingredients</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Index</th>
+                    <td>@item.RecipeName</td>
+                    <td>@item.Ingredients</td>
+                    <td><input type="button" class="btn btn-info" value="Edit" onclick="UpdateRecipe(@item.RecipeId);" /> </td>
+                    <td><input type="button" class="btn btn-danger" value="Delete" onclick="DeleteRecipe(@item.RecipeId);" /></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<script>
+    function CreateRecipe() {
+        window.location.href= '@Url.Action("CreateRecipe", "Home")';
+    }
+
+    function UpdateRecipe(RecipeId) {
+        window.location.href = '@Url.Action("UpdateRecipe", "Home")?RecipeId=' + RecipeId;
+    }
+
+    function DeleteRecipe(RecipeId) {
+        var result = confirm("Are you sure for delete this recipe ?");
+        if (result) {
+            window.location.href = '@Url.Action("DeleteRecipe", "Home")?RecipeId=' + RecipeId;
+        }
+    }
+</script>

@@ -1,0 +1,29 @@
+{
+  "name": "PWADemo",
+  "short_name": "Recipe App",
+  "description": "Recipe App in ASP.NET Core.",
+  "icons": [
+    {
+      "src": "images/icons/icons-recipe.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icons/icons-recipe.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "images/icons/icons-recipe.png",
+      "sizes": "168x168",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/icons-recipe.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/"
+}    
