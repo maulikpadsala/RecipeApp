@@ -22,6 +22,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Recipe</th>
                 <th scope="col">Ingredients</th>
+                <th scope="col">View</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -29,13 +30,14 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <th scope="row">@item.Index</th>
-                    <td>@item.RecipeName</td>
-                    <td>@item.Ingredients</td>
-                    <td><input type="button" class="btn btn-info" value="Edit" onclick="UpdateRecipe(@item.RecipeId);" /> </td>
-                    <td><input type="button" class="btn btn-danger" value="Delete" onclick="DeleteRecipe(@item.RecipeId);" /></td>
-                </tr>
+            <tr>
+                <th scope="row">@item.Index</th>
+                <td>@item.RecipeName</td>
+                <td>@item.Ingredients</td>
+                <td><input type="button" class="btn btn-primary" value="View" onclick="ViewRecipe(@item.RecipeId);" /> </td>
+                <td><input type="button" class="btn btn-info" value="Edit" onclick="UpdateRecipe(@item.RecipeId);" /> </td>
+                <td><input type="button" class="btn btn-danger" value="Delete" onclick="DeleteRecipe(@item.RecipeId);" /></td>
+            </tr>
             }
 
         </tbody>
@@ -45,7 +47,9 @@
     function CreateRecipe() {
         window.location.href= '@Url.Action("CreateRecipe", "Home")';
     }
-
+    function ViewRecipe(RecipeId) {
+        window.location.href = '@Url.Action("ViewRecipe", "Home")?RecipeId=' + RecipeId;
+    }
     function UpdateRecipe(RecipeId) {
         window.location.href = '@Url.Action("UpdateRecipe", "Home")?RecipeId=' + RecipeId;
     }

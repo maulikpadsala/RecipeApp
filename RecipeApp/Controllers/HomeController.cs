@@ -132,7 +132,23 @@ namespace RecipeApp.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult ViewRecipe(int RecipeId = 0)
+        {
+            RecipeModel recipeData = new RecipeModel();
 
+            string path = ApiURL + "Recipe/GetRecipe?recipeId=" + RecipeId;
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(path).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                recipeData = JsonConvert.DeserializeObject<RecipeModel>(result);
+            }
+
+            return View(recipeData);
+        }
         public IActionResult DeleteRecipe(int RecipeId = 0)
         {
             string path = ApiURL + "Recipe/DeleteRecipe?recipeId=" + RecipeId;
