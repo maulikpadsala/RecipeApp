@@ -28,7 +28,7 @@ namespace RecipeAppAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var connectionString = "Server=PINTU-DABHI;Database=RecipeApp;Trusted_Connection=True;MultipleActiveResultSets=true";
+            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=RecipeApp;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<RecipeDataContext>(options =>
             options.UseSqlServer(connectionString));
             services.AddSwaggerGen();
