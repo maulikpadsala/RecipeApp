@@ -18,13 +18,7 @@ namespace RecipeApp.Controllers
     {
         public static string ApiURL = "https://localhost:44348/api/";
         public static string coneectionString = "";
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        
         public IActionResult Index()
         {
             List<RecipeModel> RecipeList = new List<RecipeModel>();
